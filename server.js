@@ -19,10 +19,10 @@ function getFullPgn() {
 getFullPgn();
 
 const app = express()
-app.get('/:nbPerChunk/:chunkId.pgn', function (req, res) {
-  const nbPerChunk = parseInt(req.params.nbPerChunk);
-  const chunkId = parseInt(req.params.chunkId) - 1;
-  const games = allGames.slice(chunkId * nbPerChunk, (chunkId + 1) * nbPerChunk);
+app.get('/:fromGameId/:toGameId.pgn', function (req, res) {
+  const fromGameId = parseInt(req.params.fromGameId) - 1;
+  const toGameId = parseInt(req.params.toGameId) - 1;
+  const games = allGames.slice(fromGameId, toGameId + 1);
   if (games.length) res.send(games.join(separator));
   else res.status(404).end();
 })
