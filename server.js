@@ -1,5 +1,5 @@
 
-const express = require('express')
+const express = require('express');
 const request = require('request');
 
 const port = parseInt(process.argv[2]);
@@ -11,14 +11,18 @@ let allGames = [];
 
 function getFullPgn() {
   request(source, (err, res, body) => {
-    allGames = body.split(separator).filter(g => !!g);
-    console.log(`Got ${allGames.length} games (${body.length} bytes)`);
+    if (body && !err) {
+      allGames = body.split(separator).filter(g => !!g);
+      console.log(`Got ${allGames.length} games (${body.length} bytes)`);
+    } else {
+      console.log(`ERROR ${err}`);
+    }
     setTimeout(getFullPgn, delay * 1000);
   });
 }
 getFullPgn();
 
-const app = express()
+const app = express();
 app.get('/:fromGameId/:toGameId.pgn', function (req, res) {
   const fromGameId = parseInt(req.params.fromGameId) - 1;
   const toGameId = parseInt(req.params.toGameId) - 1;
