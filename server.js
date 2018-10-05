@@ -14,8 +14,10 @@ function getFullPgn() {
     if (body && !err) {
       allGames = body.split(separator).filter(g => !!g);
       console.log(`Got ${allGames.length} games (${body.length} bytes)`);
+    } else if (!body) {
+      console.log(`Empty response`);
     } else {
-      console.log(`ERROR ${err}`);
+      console.log(`ERROR ${res.statusCode} err:${err}`);
     }
     setTimeout(getFullPgn, delay * 1000);
   });
