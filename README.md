@@ -1,5 +1,8 @@
 Split big PGN sources into multiple URLs, for use with lichess broadcasts.
 
+### install
+
+    yarn install
 
 ### run server:
     node server.js <port> <source> <delay>
