@@ -5,7 +5,7 @@ const request = require('request');
 const port = parseInt(process.argv[2]);
 const source = process.argv[3];
 const delay = parseInt(process.argv[4]);
-const separator = '\n\n\n';
+const separator = '\n\n[';
 
 let allGames = [];
 
