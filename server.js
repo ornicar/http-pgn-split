@@ -29,7 +29,12 @@ app.get('/:fromGameId/:toGameId.pgn', function (req, res) {
   const fromGameId = parseInt(req.params.fromGameId) - 1;
   const toGameId = parseInt(req.params.toGameId) - 1;
   const games = allGames.slice(fromGameId, toGameId + 1);
-  if (games.length) res.send(games.join(separator));
+  if (games.length) {
+    let pgn = games.join(separator);
+    if (pgn[0] != '[') pgn = '[' + pgn;
+    pgn = pgn.split('\n').filter(l => l.indexOf('[Site ') !== 0).join('\n');
+    res.send(pgn);
+  }
   else res.status(404).end();
 })
 app.listen(port, function () {
