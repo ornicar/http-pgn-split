@@ -10,8 +10,8 @@
   "author": "",
   "license": "AGPL-3.0",
   "dependencies": {
-    "express": "^4.16",
-    "nodemon": "^1.18",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1",
     "request": "^2.88"
   }
 }
